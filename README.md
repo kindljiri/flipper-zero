@@ -2,4 +2,4 @@
 
 My collection of files for flipper zero
 - [Infrared]()
-- [BadUSB]()
+- [BadUSB](https://github.com/kindljiri/flipper-zero/tree/main/badUSB)
